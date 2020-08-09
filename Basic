@@ -1,0 +1,74 @@
+
+
+													@@@@ NODE @@@
+													--------------
+													
+#) 	Node is a C++ program that embeds Chrome’s v8 engine, the fastest JS engine in the world
+	Node is asyc in nature. Node applications are single-threaded. That means a single thread is used to serve all clients, That means when the application involves I/O operations (eg accessing the file system or the network), the thread doesn’t wait (or block) for the result of the operation. It is released to serve other clients.
+	
+	We use Node to build fast and scalable networking applications. It’s a perfect choice for building RESTful services. It inform server to request and serve other client while server is processing request, once server is ready with response it add and even in the event queue. Node thread continuously monitor event queue and sends response it client once ready.
+	
+	But Node is not best to use with CPU oriented application like video encoding service.becuse other client have to wait long.
+	
+	Node does not have objects like "windows" and "document" they are in javascript browser oriented. insted it have it's own object.
+											
+#)  cmd
+	node --version
+	
+	//Install
+	
+	mkdir directoryName
+	cd directoryName
+	
+#)	code .  //OPENS VScode
+	// create file app.js
+	
+#)	node fileName.js //RUN NODE
+
+#) easily find errors in an node/js file with jshint
+	ex
+		jshint fileName.js
+  _____________________________________________________________________________________________________________________________
+ 
+												@@@ NODE MODULES @@@@
+
+(#) global object
+	-------------
+	NOTE: in JS we have "window" as global object. But in node we have "global" object
+	
+	global.conole.log();  or console.log(); // console object is of global scope i.e can access anywher
+	setTimeout();
+	clearTimeout();
+	setInterval();
+	clearInterval();
+	
+(IMP#) NODE is a MODULE base language. (at least one module. every file is a module)
+	variable and function defined in a node file are only Scoped to the file.
+	Any variable or function defined in a module are not available to other module. until it is explicetly exprot it and make it public.
+	
+	(1) each module have a set of property that can be shown from
+	//consoling below to first line of module/file
+	console.log(module);
+	
+	one property is "exports" , so anything which is added to this object will be available for public
+	
+	//	to make a function available public we add it to "exports" AS
+		module.exports.<afterExportName> = <nameOfFunctionOrVarialbe_ToExport>;
+		
+	**** WE CAN EXPORT INDIVIDUAL FUNCTION rather THAN FULL MODULE
+		
+	(2) now if another module wanted to use this publicly available functionality of a module
+		it need to be called from "require" function. It requrn the exports object of the module
+		Ex	
+			- require('<complete path to module whose functionaliy we wanted to use>');
+			- require('./<moduleName>'); //if in same folder
+			- require('../<moduleName>'); //if in parent folder
+			- require('./subfolder/<moduleName>'); //if in subfolder
+			
+		ONCE CALL "require" function, we can see all the available public available items of the module
+		Ex
+			var/const avlItems = require('./logger');  // GOOD TO USE const, so we do not accicently change avlItem value
+			console.log(avlItems);
+			
+		
+		
